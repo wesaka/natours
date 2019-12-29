@@ -41,7 +41,7 @@ body {
     position: absolute;
     /* Top and bottom count the distance between the element itself and the parent which has position: relative set */
     top: 40px;
-    bottom: 40px;
+    left: 40px;
 }
 
 .logo {
@@ -60,6 +60,7 @@ body {
     height to top
      */
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .heading-primary {
@@ -68,6 +69,7 @@ body {
 
     /* This fixes the little shake at the end of the animations */
     backface-visibility: hidden;
+    margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -140,4 +142,92 @@ Browsers are specially optimized for animating opacity and transform.
         opacity: 1;
         transform: translate(0);
     }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+/*
+This way of isolating link and visited states ensure that the button is going to look
+the same regardless of if it was already clicked
+*/
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+
+    /* It is important to set the display as block when setting padding, margin, etc */
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+
+    /* We set what can transition and how much time it takes to complete it, in the button case, the transforms */
+    transition: all .2s;
+
+    /* So we can use absolute in the after pseudo element */
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+
+    /* The first value is for X, then Y and the blur and finally the color of the shadow */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+    background-color: white;
+    color: #777777;
+}
+
+.btn::after {
+    /* For the after pseudo element actually appear on the page, we need to specify its content */
+    content: "";
+
+    /* Just like what our button is styled as */
+    display: inline-block;
+
+    /* The sizing works because this is treated practically as the child of the button class */
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+
+    /* Once again, position absolute references itself in the first parent it finds with position relative */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.btn-white::after {
+    background-color: white;
+    color: #777777;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated {
+    /* animation: animationName animationDuration animationFunction animationDelay*/
+    animation: moveInBottom .5s ease-out .75s;
+
+    /* Automatically applies the styles of the "0%" at the start */
+    animation-fill-mode: backwards;
 }
