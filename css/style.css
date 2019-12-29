@@ -6,3 +6,81 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+/* This allows us to zero all the margins the browser would set for us in some elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;
+}
+
+.header {
+    height: 95vh;
+    background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8)), url(../img/hero.jpg);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+
+    /*
+    This sets a shape to clip the image
+    We set the shape we want displayed here
+    */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
+
+.logo-box {
+    position: absolute;
+    /* Top and bottom count the distance between the element itself and the parent which has position: relative set */
+    top: 40px;
+    bottom: 40px;
+}
+
+.logo {
+    height: 35px;
+}
+
+.text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+
+    /*
+    When we set position: absolute and top/bottom to 50%, we set these dimensions counting from the top left corner
+    of the parent, to the top left corner of the element, we can fix this using the translate property, that shifts
+    the position of the element itself by, in this case, 50% of the element width to the right and 50% of the element
+    height to top
+     */
+    transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+    color: white;
+    text-transform: uppercase;
+}
+
+.heading-primary-main {
+    /*
+    We apply display block to our spans, as the span is an inline element,
+    display block sets it to use the whole width of the page
+    */
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+}
