@@ -65,6 +65,9 @@ body {
 .heading-primary {
     color: white;
     text-transform: uppercase;
+
+    /* This fixes the little shake at the end of the animations */
+    backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -76,11 +79,65 @@ body {
     font-size: 60px;
     font-weight: 400;
     letter-spacing: 35px;
+
+    /*
+    Also, the declaration of the animation can be done in one line also:
+    animation: moveInLeft 1s ease-out;
+    */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /*
+    We won't be using other commonly used properties, such as animation-iteration-count or animation-delay
+    but they are commonly used in webpages
+    */
 }
 
 .heading-primary-sub {
     display: block;
     font-size: 20px;
     font-weight: 700;
-    letter-spacing: 17.4px;
+    letter-spacing: 17px;
+
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+/*
+The keyframes lets us make a "function" with the various steps of the movement, in this case we establish the position
+at the start and the end of the animation.
+Browsers are specially optimized for animating opacity and transform.
+*/
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: translateX(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
